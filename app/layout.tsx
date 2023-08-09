@@ -14,8 +14,8 @@ interface RootLayoutProps {
 
 export const metadata: Metadata = {
   title: {
-    default: "formthing",
-    template: "%s - formthing",
+    default: "FormThing",
+    template: "%s - FormThing",
   },
   description: "Todo",
 };
