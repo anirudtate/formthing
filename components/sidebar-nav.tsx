@@ -21,7 +21,7 @@ export function DocsSidebarNav({ items }: DocsSidebarNavProps) {
             {item.title}
           </h4>
           {item?.items?.length && (
-            <DocsSidebarNavItems items={item.items} pathname={pathname} />
+            <DocsSidebarNavItems items={items} pathname={pathname} />
           )}
         </div>
       ))}
