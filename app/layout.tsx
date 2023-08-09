@@ -1,7 +1,6 @@
 import "@/styles/globals.css";
 import { Metadata } from "next";
 
-import { siteConfig } from "@/config/site";
 import { fontSans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import { SiteFooter } from "@/components/site-footer";
@@ -15,10 +14,10 @@ interface RootLayoutProps {
 
 export const metadata: Metadata = {
   title: {
-    default: siteConfig.name,
-    template: `%s - ${siteConfig.name}`,
+    default: "formthing",
+    template: "%s - formthing",
   },
-  description: siteConfig.description,
+  description: "Todo",
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {
