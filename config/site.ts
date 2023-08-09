@@ -1,16 +1,9 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "TagOn ERP",
-  description:
-    "Beautifully designed components built with Radix UI and Tailwind CSS.",
-  mainNav: [
-    // {
-    //   title: "Home",
-    //   href: "/",
-    // },
-  ],
+  name: "FormThing",
+  description: "Todo",
   links: {
-    landingPage: "https://tagonstore.com",
+    github: "https://github.com/anirudtate/formthing",
   },
 };
