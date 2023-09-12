@@ -1,3 +1,4 @@
+import { trpc } from "@/lib/trpc"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -58,8 +59,22 @@ export default function Home() {
             <Button variant="ghost">Cancel</Button>
             <Button>Submit</Button>
           </div>
+          <Trpc />
         </div>
       </div>
     </main>
+  )
+}
+
+function Trpc() {
+  const hello = trpc.test.useQuery()
+  if (hello.isFetching || !hello.data) {
+    return <div>Loading...</div>
+  }
+  return (
+    <div>
+      <p>{hello.data.map((x) => x.name + ", ")}</p>
+      <Button onClick={() => hello.refetch()}>Refech</Button>
+    </div>
   )
 }
