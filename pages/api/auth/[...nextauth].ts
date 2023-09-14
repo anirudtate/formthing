@@ -1,10 +1,14 @@
+import { DrizzleAdapter } from "@auth/drizzle-adapter"
 import * as dotenv from "dotenv"
 import NextAuth from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 
+import { db } from "@/lib/db"
+
 dotenv.config()
 
 export const authOptions = {
+  adapter: DrizzleAdapter(db),
   pages: {
     signIn: "/auth/signin",
     signOut: "/auth/signout",
