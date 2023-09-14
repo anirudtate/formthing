@@ -5,14 +5,17 @@ import { ThemeProvider } from "@/components/theme-provider"
 import "@/styles/globals.css"
 
 import type { AppProps } from "next/app"
+import { SessionProvider } from "next-auth/react"
 
-function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-      <MainLayout>
-        <Component {...pageProps} />
-      </MainLayout>
-    </ThemeProvider>
+    <SessionProvider session={session}>
+      <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+        <MainLayout>
+          <Component {...pageProps} />
+        </MainLayout>
+      </ThemeProvider>
+    </SessionProvider>
   )
 }
 

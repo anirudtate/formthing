@@ -1,3 +1,5 @@
+import { signIn, signOut, useSession } from "next-auth/react"
+
 import { trpc } from "@/lib/trpc"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -60,6 +62,7 @@ export default function Home() {
             <Button>Submit</Button>
           </div>
           <Trpc />
+          <Auth />
         </div>
       </div>
     </main>
@@ -67,14 +70,34 @@ export default function Home() {
 }
 
 function Trpc() {
-  const hello = trpc.test.useQuery()
-  if (hello.isFetching || !hello.data) {
+  const test = trpc.test.get.useQuery()
+  if (test.isFetching || !test.data) {
     return <div>Loading...</div>
   }
   return (
     <div>
-      <p>{hello.data.map((x) => x.name + ", ")}</p>
-      <Button onClick={() => hello.refetch()}>Refech</Button>
+      <p>{test.data.map((x) => x.name + ", ")}</p>
+      <Button onClick={() => test.refetch()}>Refetch</Button>
     </div>
+  )
+}
+
+function Auth() {
+  const { data: session } = useSession()
+  if (session) {
+    return (
+      <>
+        Signed in as {session?.user?.email} <br />
+        <button onClick={() => signOut({ redirect: false })}>Sign out</button>
+      </>
+    )
+  }
+  return (
+    <>
+      Not signed in <br />
+      <button onClick={() => signIn(undefined, { redirect: false })}>
+        Sign in
+      </button>
+    </>
   )
 }
