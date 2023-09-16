@@ -4,6 +4,7 @@ import Link from "next/link"
 import { getServerSession } from "next-auth/next"
 import { signIn } from "next-auth/react"
 
+import { trpc } from "@/lib/trpc"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -18,7 +19,7 @@ import { Icons } from "@/components/icons"
 
 import { authOptions } from "../api/auth/[...nextauth]"
 
-export default function SignIn() {
+export default function SignUp() {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -28,26 +29,26 @@ export default function SignIn() {
     <Dialog open={mounted}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader className="space-y-1">
-          <DialogTitle className="text-2xl">Create an account</DialogTitle>
+          <DialogTitle className="text-2xl">Welcome back</DialogTitle>
           <DialogDescription>
-            Enter username and password below to create your account
+            Enter username and password below to sign in
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="email">Username</Label>
-            <Input id="email" type="text" placeholder="Username" />
+            <Input id="email" type="text" required placeholder="Username" />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" placeholder="Password" />
+            <Input
+              id="password"
+              type="password"
+              required
+              placeholder="Password"
+            />
           </div>
-          <Button
-            className="mt-2"
-            onClick={() => signIn("github", { redirect: false })}
-          >
-            Create account
-          </Button>
+          <Button className="mt-2">Sign in</Button>
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t" />
@@ -58,7 +59,7 @@ export default function SignIn() {
               </span>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 gap-6">
             <Button
               variant="outline"
               onClick={() => signIn("github", { redirect: false })}
@@ -66,21 +67,14 @@ export default function SignIn() {
               <Icons.gitHub className="mr-2 h-4 w-4" />
               Github
             </Button>
-            <Button
-              variant="outline"
-              onClick={() => signIn("google", { redirect: false })}
-            >
-              <Icons.google className="mr-2 h-4 w-4" />
-              Google
-            </Button>
           </div>
           <p className="text-sm text-center text-muted-foreground">
-            Already have an account ?{" "}
+            Don't have an account ?{" "}
             <Link
               href="/terms"
               className="underline underline-offset-4 hover:text-primary"
             >
-              Sign in
+              Sign up
             </Link>
           </p>
         </div>

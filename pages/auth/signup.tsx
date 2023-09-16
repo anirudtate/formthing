@@ -4,6 +4,7 @@ import Link from "next/link"
 import { getServerSession } from "next-auth/next"
 import { signIn } from "next-auth/react"
 
+import { trpc } from "@/lib/trpc"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -18,8 +19,11 @@ import { Icons } from "@/components/icons"
 
 import { authOptions } from "../api/auth/[...nextauth]"
 
-export default function SignUp() {
+export default function SignIn() {
   const [mounted, setMounted] = useState(false)
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const signUp = trpc.auth.signUp.useMutation()
 
   useEffect(() => {
     setMounted(true)
@@ -28,25 +32,42 @@ export default function SignUp() {
     <Dialog open={mounted}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader className="space-y-1">
-          <DialogTitle className="text-2xl">Welcome back</DialogTitle>
+          <DialogTitle className="text-2xl">Create an account</DialogTitle>
           <DialogDescription>
-            Enter username and password below to sign in
+            Enter username and password below to create your account
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="email">Username</Label>
-            <Input id="email" type="text" placeholder="Username" />
+            <Input
+              id="email"
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            {signUp.error?.message && (
+              <div>{JSON.parse(signUp.error?.message).username}</div>
+            )}
           </div>
           <div className="grid gap-2">
             <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" placeholder="Password" />
+            <Input
+              id="password"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
           <Button
             className="mt-2"
-            onClick={() => signIn("github", { redirect: false })}
+            onClick={() =>
+              signUp.mutate({ username: username, password: password })
+            }
           >
-            Sign in
+            Create account
           </Button>
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
@@ -58,7 +79,7 @@ export default function SignUp() {
               </span>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 gap-6">
             <Button
               variant="outline"
               onClick={() => signIn("github", { redirect: false })}
@@ -66,21 +87,14 @@ export default function SignUp() {
               <Icons.gitHub className="mr-2 h-4 w-4" />
               Github
             </Button>
-            <Button
-              variant="outline"
-              onClick={() => signIn("google", { redirect: false })}
-            >
-              <Icons.google className="mr-2 h-4 w-4" />
-              Google
-            </Button>
           </div>
           <p className="text-sm text-center text-muted-foreground">
-            Don't have an account ?{" "}
+            Already have an account ?{" "}
             <Link
               href="/terms"
               className="underline underline-offset-4 hover:text-primary"
             >
-              Sign up
+              Sign in
             </Link>
           </p>
         </div>
