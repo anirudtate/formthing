@@ -1,9 +1,9 @@
-import { signIn, signOut, useSession } from "next-auth/react"
+import { signIn, signOut, useSession } from "next-auth/react";
 
-import { trpc } from "@/lib/trpc"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { trpc } from "@/lib/trpc";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -11,7 +11,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 
 export default function Home() {
   return (
@@ -66,31 +66,31 @@ export default function Home() {
         </div>
       </div>
     </main>
-  )
+  );
 }
 
 function Trpc() {
-  const test = trpc.test.get.useQuery()
+  const test = trpc.test.get.useQuery();
   if (test.isFetching || !test.data) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
   return (
     <div>
       <p>{test.data.map((x) => x.name + ", ")}</p>
       <Button onClick={() => test.refetch()}>Refetch</Button>
     </div>
-  )
+  );
 }
 
 function Auth() {
-  const { data: session } = useSession()
+  const { data: session } = useSession();
   if (session) {
     return (
       <>
         Signed in as {session?.user?.email} <br />
         <button onClick={() => signOut({ redirect: false })}>Sign out</button>
       </>
-    )
+    );
   }
   return (
     <>
@@ -99,5 +99,5 @@ function Auth() {
         Sign in
       </button>
     </>
-  )
+  );
 }

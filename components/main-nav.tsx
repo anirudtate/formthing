@@ -1,11 +1,11 @@
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-import { navConfig } from "@/config/nav"
-import { cn } from "@/lib/utils"
+import { navConfig } from "@/config/nav";
+import { cn } from "@/lib/utils";
 
 export function MainNav() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <div className="mr-4 hidden md:flex">
@@ -24,5 +24,5 @@ export function MainNav() {
         ))}
       </nav>
     </div>
-  )
+  );
 }

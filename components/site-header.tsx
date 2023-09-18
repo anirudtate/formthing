@@ -1,11 +1,11 @@
-import Link from "next/link"
+import Link from "next/link";
 
-import { siteConfig } from "@/config/site"
-import { Button } from "@/components/ui/button"
-import { Icons } from "@/components/icons"
-import { MainNav } from "@/components/main-nav"
-import { MobileNav } from "@/components/mobile-nav"
-import { ThemeToggle } from "@/components/theme-toggle"
+import { siteConfig } from "@/config/site";
+import { Button } from "@/components/ui/button";
+import { Icons } from "@/components/icons";
+import { MainNav } from "@/components/main-nav";
+import { MobileNav } from "@/components/mobile-nav";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export function SiteHeader() {
   return (
@@ -36,5 +36,5 @@ export function SiteHeader() {
         </div>
       </div>
     </header>
-  )
+  );
 }

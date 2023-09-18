@@ -1,6 +1,6 @@
 export interface NavItem {
-  title: string
-  href: string
+  title: string;
+  href: string;
 }
 
 export const navConfig: NavItem[] = [
@@ -12,4 +12,4 @@ export const navConfig: NavItem[] = [
     title: "About",
     href: "/about",
   },
-]
+];

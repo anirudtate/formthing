@@ -1,4 +1,4 @@
-import type { AdapterAccount } from "@auth/core/adapters"
+import type { AdapterAccount } from "@auth/core/adapters";
 import {
   integer,
   pgTable,
@@ -6,12 +6,12 @@ import {
   serial,
   text,
   timestamp,
-} from "drizzle-orm/pg-core"
+} from "drizzle-orm/pg-core";
 
 export const test = pgTable("test", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
-})
+});
 
 export const users = pgTable("user", {
   id: text("id").notNull().primaryKey(),
@@ -19,7 +19,7 @@ export const users = pgTable("user", {
   email: text("email"),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
-})
+});
 
 export const accounts = pgTable(
   "account",
@@ -41,7 +41,7 @@ export const accounts = pgTable(
   (account) => ({
     compoundKey: primaryKey(account.provider, account.providerAccountId),
   })
-)
+);
 
 export const sessions = pgTable("session", {
   sessionToken: text("sessionToken").notNull().primaryKey(),
@@ -49,7 +49,7 @@ export const sessions = pgTable("session", {
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   expires: timestamp("expires", { mode: "date" }).notNull(),
-})
+});
 
 export const verificationTokens = pgTable(
   "verificationToken",
@@ -61,4 +61,4 @@ export const verificationTokens = pgTable(
   (vt) => ({
     compoundKey: primaryKey(vt.identifier, vt.token),
   })
-)
+);

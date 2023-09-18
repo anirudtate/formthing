@@ -1,7 +1,7 @@
-import * as dotenv from "dotenv"
-import type { Config } from "drizzle-kit"
+import * as dotenv from "dotenv";
+import type { Config } from "drizzle-kit";
 
-dotenv.config()
+dotenv.config();
 
 export default {
   schema: "./database/*",
@@ -10,4 +10,4 @@ export default {
   dbCredentials: {
     connectionString: process.env.POSTGRES_URL as string,
   },
-} satisfies Config
+} satisfies Config;

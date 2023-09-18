@@ -7,6 +7,6 @@ export const siteConfig = {
   links: {
     github: "https://github.com/shadcn-ui/ui",
   },
-}
+};
 
-export type SiteConfig = typeof siteConfig
+export type SiteConfig = typeof siteConfig;

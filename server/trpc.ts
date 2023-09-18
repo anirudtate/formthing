@@ -1,5 +1,5 @@
-import { initTRPC } from "@trpc/server"
-import { ZodError } from "zod"
+import { initTRPC } from "@trpc/server";
+import { ZodError } from "zod";
 
 // Avoid exporting the entire t-object
 // since it's not very descriptive.
@@ -7,7 +7,7 @@ import { ZodError } from "zod"
 // is common in i18n libraries.
 const t = initTRPC.create({
   errorFormatter(opts) {
-    const { shape, error } = opts
+    const { shape, error } = opts;
     return {
       ...shape,
       data: {
@@ -17,10 +17,10 @@ const t = initTRPC.create({
             ? error.cause.flatten()
             : null,
       },
-    }
+    };
   },
-})
+});
 
 // Base router and procedure helpers
-export const router = t.router
-export const procedure = t.procedure
+export const router = t.router;
+export const procedure = t.procedure;

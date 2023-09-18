@@ -1,11 +1,11 @@
-import { test, users } from "@/database/schema"
-import { TRPCError } from "@trpc/server"
-import { eq } from "drizzle-orm"
-import { z } from "zod"
+import { test, users } from "@/database/schema";
+import { TRPCError } from "@trpc/server";
+import { eq } from "drizzle-orm";
+import { z } from "zod";
 
-import { db } from "@/lib/db"
+import { db } from "@/lib/db";
 
-import { procedure, router } from "../trpc"
+import { procedure, router } from "../trpc";
 
 export const authRouter = router({
   signUp: procedure
@@ -19,15 +19,15 @@ export const authRouter = router({
       const usersWithSameName = await db
         .select()
         .from(users)
-        .where(eq(users.name, input.username))
+        .where(eq(users.name, input.username));
       if (usersWithSameName.length > 0) {
         throw new TRPCError({
           code: "BAD_REQUEST",
           message: JSON.stringify({
             username: "Username already exists.",
           }),
-        })
+        });
       }
-      return await db.select().from(test)
+      return await db.select().from(test);
     }),
-})
+});

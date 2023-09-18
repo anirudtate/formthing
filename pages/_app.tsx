@@ -1,11 +1,11 @@
-import { trpc } from "@/lib/trpc"
-import { MainLayout } from "@/components/main-layout"
-import { ThemeProvider } from "@/components/theme-provider"
+import { trpc } from "@/lib/trpc";
+import { MainLayout } from "@/components/main-layout";
+import { ThemeProvider } from "@/components/theme-provider";
 
-import "@/styles/globals.css"
+import "@/styles/globals.css";
 
-import type { AppProps } from "next/app"
-import { SessionProvider } from "next-auth/react"
+import type { AppProps } from "next/app";
+import { SessionProvider } from "next-auth/react";
 
 function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
@@ -16,7 +16,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
         </MainLayout>
       </ThemeProvider>
     </SessionProvider>
-  )
+  );
 }
 
-export default trpc.withTRPC(App)
+export default trpc.withTRPC(App);

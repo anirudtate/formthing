@@ -1,9 +1,9 @@
-import { type ReactNode } from "react"
+import { type ReactNode } from "react";
 
-import { SiteHeader } from "@/components/site-header"
+import { SiteHeader } from "@/components/site-header";
 
 interface Props {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export function MainLayout(props: Props) {
@@ -12,5 +12,5 @@ export function MainLayout(props: Props) {
       <SiteHeader />
       <div className="container">{props.children}</div>
     </div>
-  )
+  );
 }

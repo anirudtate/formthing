@@ -1,30 +1,30 @@
-import { useEffect, useState } from "react"
-import type { GetServerSidePropsContext } from "next"
-import Link from "next/link"
-import { getServerSession } from "next-auth/next"
-import { signIn } from "next-auth/react"
+import { useEffect, useState } from "react";
+import type { GetServerSidePropsContext } from "next";
+import Link from "next/link";
+import { getServerSession } from "next-auth/next";
+import { signIn } from "next-auth/react";
 
-import { trpc } from "@/lib/trpc"
-import { Button } from "@/components/ui/button"
+import { trpc } from "@/lib/trpc";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Icons } from "@/components/icons"
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Icons } from "@/components/icons";
 
-import { authOptions } from "../api/auth/[...nextauth]"
+import { authOptions } from "../api/auth/[...nextauth]";
 
 export default function SignUp() {
-  const [mounted, setMounted] = useState(false)
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
   return (
     <Dialog open={mounted}>
       <DialogContent className="sm:max-w-[425px]">
@@ -80,13 +80,13 @@ export default function SignUp() {
         </div>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getServerSession(context.req, context.res, authOptions)
+  const session = await getServerSession(context.req, context.res, authOptions);
   if (session) {
-    return { redirect: { destination: "/" } }
+    return { redirect: { destination: "/" } };
   }
-  return { props: {} }
+  return { props: {} };
 }
